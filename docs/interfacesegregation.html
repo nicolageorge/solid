@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Solid Principles</title>
+</head>
+
+<body>
+
+The Interface Segregation Principle
+
+    <br /><br />The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.
+
+<br /><br />In all modular applications there must be some kind of interface that the client can rely on. These may be actual Interface typed entities or other classic objects implementing design patterns like Facades. It doesn't matter which solution is used. It always has the same scope: to communicate to the client code on how to use the module. These interfaces can reside between different modules in the same application or project, or between one project as a third party library serving another project. Again, it doesn't matter. Communication is communication and clients are clients, regardless of the actual individuals writing the code.
+
+<br /><br />So, how should we define these interfaces? We could think about our module and expose all the functionalities we want it to offer.
+<br /><br /><img src="https://cdn.tutsplus.com/net/uploads/2014/01/hugeInterface.png">
+
+<br /><br />This looks like a good start, a great way to define what we want to implement in our module. Or is it? A start like this will lead to one of two possible implementations:
+
+    <br /><br />A huge Car or Bus class implementing all the methods on the Vehicle interface. Only the sheer dimensions of such classes should tell us to avoid them at all costs.
+    <br /><br />Or, many small classes like LightsControl, SpeedControl, or RadioCD which are all implementing the whole interface but actually providing something useful only for the parts they implement.
+
+<br /><br />It is obvious that neither solution is acceptable to implement our business logic.
+<br /><br /><img src="https://cdn.tutsplus.com/net/uploads/2014/01/specializedImplementationInterface.png">
+
+<br /><br />We could take another approach. Break the interface into pieces, specialized to each implementation. This would help to use small classes that care about their own interface. The objects implementing the interfaces will be used by the different type of vehicles, like car in the image above. The car will use the implementations but will depend on the interfaces. So a schema like the one below may be even more expressive.
+<br /><br /><img src="https://cdn.tutsplus.com/net/uploads/2014/01/carUsingInterface.png">
+
+<br /><br />But this fundamentally changes our perception of the architecture. The Car becomes the client instead of the implementation. We still want to provide to our clients ways to use our whole module, that being a type of vehicle.
+    <br /><br /><img src="https://cdn.tutsplus.com/net/uploads/2014/01/oneInterfaceManyClients.png">
+
+
+<br /><br />Assume we solved the implementation problem and we have a stable business logic. The easiest thing to do is to provide a single interface with all the implementations and let the clients, in our case BusStation, HighWay, Driver and so on, to use whatever thew want from the interface's implementation. Basically, this shifts the behavior selection responsibility to the clients. You can find this kind of solution in many older applications.
+
+<br /><br />The interface-segregation principle (ISP) states that no client should be forced to depend on methods it does not use.
+
+<br /><br />However, this solution has its problems. Now all the clients depend on all the methods. Why should a BusStation depend on the state of lights of the bus, or on the radio channels selected by the driver? It should not. But what if it does? Does it matter? Well, if we think about the Single Responsibility Principle, it is a sister concept to this one. If BusStation depends on many individual implementations, not even used by it, it may require changes if any of the individual small implementations change. This is especially true for compiled languages, but we can still see the effect of the LightControl change impacting BusStation. These things should never happen.
+
+<br /><br />Interfaces belong to their clients and not to the implementations. Thus, we should always design them in a way to best suite our clients. Some times we can, some times we can not exactly know our clients. But when we can, we should break our interfaces in many smaller ones, so they better satisfy the exact needs of our clients.
+<br /><br /><img src="https://cdn.tutsplus.com/net/uploads/2014/01/segregatedInterfaces.png">
+
+    <br /><br />rse, this will lead to some degree of duplication. But remember! Interfaces are just plain function name definitions. There is no implementation of any kind of logic in them. So the duplications is small and manageable.
+
+<br /><br />Then, we have the great advantage of clients depending only and only on what they actually need and use. In some cases, clients may use and need several interfaces, that is OK, as long as they use all the methods from all the interfaces they depend on.
+
+<br /><br />Another nice trick is that in our business logic, a single class can implement several interfaces if needed. So we can provide a single implementation for all the common methods between the interfaces. The segregated interfaces will also force us to think of our code more from the client's point of view, which will in turn lead to loose coupling and easy testing. So, not only have we made our code better to our clients, we also made it easier for ourselves to understand, test and implement.
+
+    </body></html>
