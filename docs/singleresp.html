@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Solid Principles</title>
+</head>
+
+<body>
+
+
+<h1>A class should only have ONE reason to change</h1><br />
+<ul>
+	 <li>Multiple reasons may lead to multiple redeployments</li>
+	 <li>The same class or module needs to be retested for different reasons = more QA, more effort</li>
+</ul>
+
+
+<h2>The Audience</h2>
+	 <p>Identifying the audience, the users of the application/module who request the change, ex:</p>
+<ul>
+	<li>Persistence Module - Audience include DBAs and software architects.</li>
+    <li>Reporting Module - Audience include clerks, accountants, and operations.</li>
+    <li>Payment Computation Module for a Payroll System - Audience may include lawyers, managers, and accountants.</li>
+    <li>Book Search Module for a Library Management System - Audience may include the librarian and/or the clients themselves.</li>
+</ul>
+
+Roles and Actors<br />
+
+<br />Associating concrete persons to all of these roles may be difficult. In a small company a single person may need to satisfy several roles while in a large company there may be several persons allocated to a single role. So it seems much more reasonable to think about the roles. But roles by themselves are quite difficult to define. What is a role? How do we find it? It is much easier to imagine actors doing those roles and associating our audience with those actors.
+
+<br />So if our audience defines reasons for change, the actors define the audience. This greatly helps us to reduce the concept of concrete persons like "John the architect" to Architecture, or "Mary the referent" to Operations.
+
+    <br />So a responsibility is a family of functions that serves one particular actor. (Robert C. Martin)
+
+<br />Source of Change
+
+<br />In the sense of this reasoning, actors become a source of change for the family of functions that serves them. As their needs change, that specific family of functions must also change to accommodate their needs.
+
+<br />An actor for a responsibility is the single source of change for that responsibility. (Robert C. Martin)
+
+
+
+    <h3>Conclusion</h3>
+    The Single Responsibility Principle should always be considered when we write code. Class and module design is highly affected by it and it leads to a
+    <br />low coupled design with less and lighter dependencies. But as any coin, it has two faces. It is tempting to design from the beginning of
+    <br />our application with SRP in mind. It is also tempting to identify as many actors as we want or need. But this is actually
+    <br />dangerous - from a design point of view - to try and think of all the parties from the very beginning.
+    <br />Excessive SRP consideration can easily lead to premature optimization and instead of a better design, it may lead to a
+    <br />scattered one where the clear responsibilities of classes or modules may be hard to understand.
+
+<br /><br />So, whenever you observe that a class or module starts to change for different reasons, don't hesitate, take
+    <br />the necessary steps to respect SRP, however don't overdue it because premature optimization can easily trick you.
+
+
+
+</body>
+
+</html>
