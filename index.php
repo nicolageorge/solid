@@ -31,6 +31,10 @@
 </ul>
 
 <a href="docs/dependencyinversion">The Dependency Inversion Principle</a>
+<ul>
+    <li>A. High-level modules should not depend on low-level modules. Both should depend on abstractions.</li>
+    <li>B. Abstractions should not depend upon details. Details should depend upon abstractions.</li>
+</ul>
 </body>
 
 </html>
